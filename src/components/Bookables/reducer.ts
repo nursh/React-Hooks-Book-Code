@@ -1,5 +1,4 @@
-import { bookables } from '../../static.json'
-import type { GetSingle } from '../../types';
+import type { Bookable } from '../../types';
 
 type Action = 
   |
@@ -14,9 +13,8 @@ type Action =
     type: "TOGGLE_HAS_DETAILS" | "NEXT_BOOKABLE"
   }
 
-type Bookable = GetSingle<typeof bookables>;
 
-type State= {
+export type State = {
   group: string;
   bookableIndex: number;
   hasDetails: boolean;
