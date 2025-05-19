@@ -1,0 +1,1 @@
+export type GetSingle<T> = T extends Array<infer R> ? R : null;
