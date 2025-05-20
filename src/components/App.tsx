@@ -3,6 +3,7 @@ import BookablesPage from "./Bookables/BookablesPage";
 import BookingsPage from "./Bookings/BookingsPage";
 import UserPicker from "./Users/UserPIcker";
 import UsersPage from "./Users/UsersPage";
+import SayHello from "../book-examples/SideEffect";
 
 import { FaCalendarAlt, FaDoorOpen, FaUsers } from "react-icons/fa";
 import "../App.css";
@@ -40,6 +41,7 @@ function App() {
         <Route path="bookings" element={<BookingsPage />} />
         <Route path="bookables" element={<BookablesPage />} />
         <Route path="users" element={<UsersPage />} />
+        <Route path="side-effects" element={<SayHello />} />
       </Routes>
     </div>
   );
