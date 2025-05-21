@@ -3,7 +3,7 @@ import BookablesPage from "./Bookables/BookablesPage";
 import BookingsPage from "./Bookings/BookingsPage";
 import UserPicker from "./Users/UserPIcker";
 import UsersPage from "./Users/UsersPage";
-import SayHello from "../book-examples/SideEffect";
+import SayHello from "../book-examples/SideEffect/AlwaysRunEffect";
 
 import { FaCalendarAlt, FaDoorOpen, FaUsers } from "react-icons/fa";
 import "../App.css";
