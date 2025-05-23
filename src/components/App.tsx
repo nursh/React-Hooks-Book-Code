@@ -7,6 +7,9 @@ import SayHello from "../book-examples/SideEffect/AlwaysRunEffect";
 
 import { FaCalendarAlt, FaDoorOpen, FaUsers } from "react-icons/fa";
 import "../App.css";
+import WindowSize from "../book-examples/SideEffect/WhenComponentMounts";
+import UserStorage from "../book-examples/SideEffect/ChangeDeps";
+import SayWindowSize from "../book-examples/SideEffect/SayWindowSize";
 
 function App() {
   return (
@@ -41,7 +44,10 @@ function App() {
         <Route path="bookings" element={<BookingsPage />} />
         <Route path="bookables" element={<BookablesPage />} />
         <Route path="users" element={<UsersPage />} />
-        <Route path="side-effects" element={<SayHello />} />
+        <Route path="always-run" element={<SayHello />} />
+        <Route path="on-mount" element={<WindowSize />} />
+        <Route path="on-deps-update" element={<UserStorage />} />
+        <Route path="say-window-size" element={<SayWindowSize />} />
       </Routes>
     </div>
   );
