@@ -1,26 +1,40 @@
 import { useState, useEffect } from "react";
 import type { User } from '../../types';
 import Spinner from "../UI/Spinner";
+import getData from "../../utils/api";
 
 export default function UsersList() {
+  const [error, setError] = useState<{ message: string } | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
   const [userIndex, setUserIndex] = useState(0);
   const [users, setUsers] = useState<User[] | null>(null);
   const user = users?.[userIndex];
 
   useEffect(() => {
-    fetch('http://localhost:3001/users')
-      .then(res => res.json())
-      .then((data: User[]) => setUsers(data))
+    getData<User[]>('http://localhost:3001/users')
+      .then(users => {
+        setUsers(users);
+        setIsLoading(false);
+      })
+      .catch(error => {
+        setError(error)
+        setIsLoading(false);
+      });
   }, []);
 
-  if (users === null) {
-    return <Spinner />
+  if (isLoading) {
+    return <p><Spinner />Loading Users...</p>
+  }
+
+  if (error && typeof error === 'object') {
+    return <p>{error.message}</p>
   }
 
   return (
     <>
       <ul className="users items-list-nav">
-        {users.map((user, idx) => (
+        {users && users.map((user, idx) => (
           <li
             key={user.id}
             className={idx === userIndex ? "selected" : undefined}
