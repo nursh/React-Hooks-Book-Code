@@ -3,8 +3,9 @@ import type { User } from '../../types';
 import Spinner from "../UI/Spinner";
 
 export default function UsersList() {
-  const [currentUser, setCurrentUser] = useState(0);
+  const [userIndex, setUserIndex] = useState(0);
   const [users, setUsers] = useState<User[] | null>(null);
+  const user = users?.[userIndex];
 
   useEffect(() => {
     fetch('http://localhost:3001/users')
@@ -18,26 +19,26 @@ export default function UsersList() {
 
   return (
     <>
-      <ul className="items-list-nav">
+      <ul className="users items-list-nav">
         {users.map((user, idx) => (
           <li
             key={user.id}
-            className={idx === currentUser ? "selected" : undefined}
+            className={idx === userIndex ? "selected" : undefined}
           >
-            <button className="btn" onClick={() => setCurrentUser(idx)}>
+            <button className="btn" onClick={() => setUserIndex(idx)}>
               {user.name}
             </button>
           </li>
         ))}
       </ul>
-      {
-        <div className="item">
+      {user &&
+        <div className="item user">
           <div className="item-header">
-            <h2>{users[currentUser].name}</h2>
+            <h2>{user.name}</h2>
           </div>
           <div className="item-details">
-            <h3>{users[currentUser].title}</h3>
-            <p>{users[currentUser].notes}</p>
+            <h3>{user.title}</h3>
+            <p>{user.notes}</p>
           </div>
         </div>
       }

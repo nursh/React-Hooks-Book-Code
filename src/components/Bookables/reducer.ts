@@ -1,5 +1,4 @@
 import type { Bookable } from '../../types';
-
 type Action = 
   |
     {
@@ -11,6 +10,14 @@ type Action =
       payload: number;
   } | {
     type: "TOGGLE_HAS_DETAILS" | "NEXT_BOOKABLE"
+  } | {
+    type: "FETCH_BOOKABLES_REQUEST"
+  } | {
+    type: "FETCH_BOOKABLES_SUCCESS",
+    payload: Bookable[]
+  } | {
+    type: "FETCH_BOOKABLES_ERROR",
+    payload: string;
   }
 
 
@@ -19,6 +26,8 @@ export type State = {
   bookableIndex: number;
   hasDetails: boolean;
   bookables: Bookable[];
+  isLoading: boolean;
+  error: boolean | string;
 }
 
 export default function reducer(state: State, action: Action): State {
@@ -55,6 +64,28 @@ export default function reducer(state: State, action: Action): State {
         bookableIndex: (state.bookableIndex + 1) % count
       }
     }
+    
+    case 'FETCH_BOOKABLES_REQUEST': 
+      return {
+        ...state,
+        isLoading: true,
+        error: false,
+        bookables: []
+      }
+
+    case 'FETCH_BOOKABLES_SUCCESS': 
+      return {
+        ...state,
+        isLoading: false,
+        bookables: action.payload
+      }
+
+    case 'FETCH_BOOKABLES_ERROR':
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      }
     
     default: 
       return state;

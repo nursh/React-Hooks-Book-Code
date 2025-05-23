@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import { bookables, sessions, days } from "../../static.json";
+import {  sessions, days } from "../../static.json";
 import { FaArrowRight } from "react-icons/fa";
 
 import reducer, { type State } from "./reducer";
@@ -8,7 +8,9 @@ const initialState: State = {
   group: "Rooms",
   bookableIndex: 0,
   hasDetails: true,
-  bookables
+  bookables: [],
+  isLoading: true,
+  error: false
 }
 
 export default function BookablesList() {
