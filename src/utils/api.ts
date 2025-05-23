@@ -1,4 +1,4 @@
-export default function getData(url: string) {
+export default async function getData<R>(url: string): Promise<R> {
 
   return fetch(url)
     .then(response => {

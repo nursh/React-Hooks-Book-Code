@@ -17,7 +17,9 @@ type Action =
     payload: Bookable[]
   } | {
     type: "FETCH_BOOKABLES_ERROR",
-    payload: string;
+    payload: {
+      message: string;
+    };
   }
 
 
@@ -27,7 +29,7 @@ export type State = {
   hasDetails: boolean;
   bookables: Bookable[];
   isLoading: boolean;
-  error: boolean | string;
+  error: boolean | { message: string };
 }
 
 export default function reducer(state: State, action: Action): State {
