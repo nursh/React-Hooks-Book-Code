@@ -1,4 +1,5 @@
-import { bookables } from './static.json';
+import { bookables, users } from '../db.json';
 
-export type GetSingle<T> = T extends Array<infer R> ? R : null;
-export type Bookable = GetSingle<typeof bookables>;
+export type GetArrayType<T> = T extends Array<infer R> ? R : null;
+export type Bookable = GetArrayType<typeof bookables>;
+export type User = GetArrayType<typeof users>;
