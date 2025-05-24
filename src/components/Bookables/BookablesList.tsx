@@ -1,4 +1,4 @@
-import { useReducer, useEffect } from "react";
+import { useReducer, useEffect, useRef } from "react";
 import { sessions, days } from "../../static.json";
 import { FaArrowRight } from "react-icons/fa";
 
@@ -17,6 +17,7 @@ const initialState: State = {
 }
 
 export default function BookablesList() {
+  const timerRef = useRef<number | null>(null);
   const [state, dispatch] = useReducer(reducer, initialState);
   const {
     group,
@@ -43,6 +44,18 @@ export default function BookablesList() {
         payload: error
       }))
   }, []);
+
+  useEffect(() => {
+    timerRef.current = setInterval(() => {
+      dispatch({ type: 'NEXT_BOOKABLE' })
+    }, 3000);
+
+    return stopPresentation;
+  }, [])
+
+  function stopPresentation() {
+    clearInterval(timerRef.current!);
+  }
 
   function nextBookable() {
     dispatch({ type: 'NEXT_BOOKABLE' })
@@ -113,6 +126,9 @@ export default function BookablesList() {
                   <input type="checkbox" checked={hasDetails} onChange={toggleDetails} />
                   Show Details
                 </label>
+                <button className="btn" onClick={stopPresentation}>
+                  Stop
+                </button>
               </span>
             </div>
 
