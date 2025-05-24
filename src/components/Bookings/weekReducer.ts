@@ -5,7 +5,7 @@ type Action =
     type: "NEXT_WEEK" | "PREV_WEEK" | "TODAY"
   } | {
     type: "SET_DATE";
-    payload: Date;
+    payload: string;
   }
 
 
