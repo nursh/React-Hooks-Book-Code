@@ -30,6 +30,7 @@ export default function BookablesList() {
   const bookablesInGroup = bookables.filter((b) => b.group === group);
   const groups = [...new Set(bookables.map((b) => b.group))];
   const bookable = bookablesInGroup[bookableIndex];
+  const nextButtonRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     dispatch({ type: 'FETCH_BOOKABLES_REQUEST' });
@@ -76,7 +77,8 @@ export default function BookablesList() {
     dispatch({
       type: 'SET_BOOKABLE',
       payload: selectedIndex
-    })
+    });
+    nextButtonRef.current?.focus();
   }
 
   if (error && typeof error == 'object') {
@@ -110,7 +112,7 @@ export default function BookablesList() {
           ))}
         </ul>
         <p>
-          <button onClick={nextBookable} autoFocus className="btn">
+          <button onClick={nextBookable} autoFocus className="btn" ref={nextButtonRef}>
             <FaArrowRight /> <span>Next</span>
           </button>
         </p>
