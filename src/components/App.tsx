@@ -11,6 +11,7 @@ import WindowSize from "../book-examples/SideEffect/WhenComponentMounts";
 import UserStorage from "../book-examples/SideEffect/ChangeDeps";
 import SayWindowSize from "../book-examples/SideEffect/SayWindowSize";
 import Counter from "../book-examples/Refs/Counter";
+import Colors from "../book-examples/Props/Colors";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
         <Route path="on-deps-update" element={<UserStorage />} />
         <Route path="say-window-size" element={<SayWindowSize />} />
         <Route path="counter" element={<Counter />} />
+        <Route path="colors" element={<Colors />} />
       </Routes>
     </div>
   );
