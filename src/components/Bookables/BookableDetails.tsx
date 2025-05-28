@@ -2,7 +2,7 @@ import {useState} from "react";
 import {days, sessions} from "../../static.json";
 import type { Bookable } from "../../types";
 
-export default function BookableDetails ({ bookable }: { bookable: Bookable }) {
+export default function BookableDetails ({ bookable }: { bookable?: Bookable }) {
   const [hasDetails, setHasDetails] = useState(true);
 
   function toggleDetails () {
