@@ -12,6 +12,7 @@ import UserStorage from "../book-examples/SideEffect/ChangeDeps";
 import SayWindowSize from "../book-examples/SideEffect/SayWindowSize";
 import Counter from "../book-examples/Refs/Counter";
 import Colors from "../book-examples/Props/Colors";
+import Anagram from "../book-examples/Memo/Anagram";
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
         <Route path="say-window-size" element={<SayWindowSize />} />
         <Route path="counter" element={<Counter />} />
         <Route path="colors" element={<Colors />} />
+        <Route path="anagram" element={<Anagram />} />
       </Routes>
     </div>
   );
