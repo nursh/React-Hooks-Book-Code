@@ -5,7 +5,7 @@ type Props = {
   week: Week;
   bookable: Bookable;
   booking: unknown[];
-  setBooking: () => void;
+  setBooking: (booking: unknown[]) => void;
 }
 
 export default function BookingsGrid(props: Props) {

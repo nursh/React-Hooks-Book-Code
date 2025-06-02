@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 
 import Spinner from "../UI/Spinner";
@@ -19,7 +19,6 @@ export default function BookablesList({ bookable, setBookable }: Props) {
 
   const bookablesInGroup = bookables.filter((b) => b.group === group);
   const groups = [...new Set(bookables.map((b) => b.group))];
-  const nextButtonRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     getData<Bookable[]>('http://localhost:3001/bookables')
@@ -49,11 +48,6 @@ export default function BookablesList({ bookable, setBookable }: Props) {
     setBookable(bookablesInSelectedGroup[0]);
   }
 
-  function changeBookable(selectedBookable: Bookable) {
-    setBookable(selectedBookable)
-    nextButtonRef.current?.focus();
-  }
-
   if (error) {
     return <p>Something went wrong...</p>
   }
@@ -77,14 +71,14 @@ export default function BookablesList({ bookable, setBookable }: Props) {
               key={b.id}
               className={b.id === bookable?.id ? "selected" : undefined}
             >
-              <button className="btn" onClick={() => changeBookable(b)}>
+              <button className="btn" onClick={() => setBookable(b)}>
                 {b.title}
               </button>
             </li>
           ))}
         </ul>
         <p>
-          <button onClick={nextBookable} autoFocus className="btn" ref={nextButtonRef}>
+          <button onClick={nextBookable} autoFocus className="btn">
             <FaArrowRight /> <span>Next</span>
           </button>
         </p>

@@ -3,6 +3,8 @@ import type { Bookable } from "../../types"
 import reducer from "./weekReducer"
 import { getWeek } from "../../utils/date-wrangler"
 import WeekPicker from "./WeekPicker"
+import BookingsGrid from "./BookingsGrid"
+import BookingDetails from "./BookingDetails"
 
 
 type Props = {
