@@ -1,6 +1,6 @@
-import { getWeek } from "../../utils/date-wrangler";
+import { getWeek, type Week } from "../../utils/date-wrangler";
 
-type Action = 
+export type Action = 
   | {
     type: "NEXT_WEEK" | "PREV_WEEK" | "TODAY"
   } | {
@@ -9,7 +9,7 @@ type Action =
   }
 
 
-export default function reducer(state: ReturnType<typeof getWeek>, action: Action) {
+export default function reducer(state: Week, action: Action) {
   switch(action.type) {
 
     case "NEXT_WEEK": 

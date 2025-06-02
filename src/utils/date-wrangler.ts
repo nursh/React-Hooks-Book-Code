@@ -14,3 +14,6 @@ export function getWeek(forDate: Date, daysOffset = 0) {
     end: addDays(date, 6 - day)
   }
 }
+
+
+export type Week = ReturnType<typeof getWeek>;
