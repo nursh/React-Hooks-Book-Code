@@ -1,10 +1,11 @@
+import type { Bookable, Booking } from "../../types";
 
 type Props = {
-  booking: unknown[];
-  setBooking: (booking: unknown[]) => void
+  booking?: Booking;
+  bookable?: Bookable;
 }
 
-export default function BookingDetails(props: Props) {
+export default function BookingDetails({ booking, bookable }: Props) {
 
   return (
     <div className="booking-details placeholder">

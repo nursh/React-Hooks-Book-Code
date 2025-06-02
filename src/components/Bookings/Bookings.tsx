@@ -1,5 +1,5 @@
 import { useReducer, useState } from "react"
-import type { Bookable } from "../../types"
+import type { Booking, Bookable } from "../../types"
 import reducer from "./weekReducer"
 import { getWeek } from "../../utils/date-wrangler"
 import WeekPicker from "./WeekPicker"
@@ -17,7 +17,7 @@ export default function Bookings({ bookable }: Props) {
     reducer, new Date(), getWeek
   );
 
-  const [booking, setBooking] = useState();
+  const [booking, setBooking] = useState<Booking>();
 
   return (
     <div className="bookings">
