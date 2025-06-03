@@ -8,7 +8,7 @@ import BookingDetails from "./BookingDetails"
 
 
 type Props = {
-  bookable: Bookable
+  bookable?: Bookable
 }
 
 export default function Bookings({ bookable }: Props) {
@@ -17,7 +17,7 @@ export default function Bookings({ bookable }: Props) {
     reducer, new Date(), getWeek
   );
 
-  const [booking, setBooking] = useState<Booking>();
+  const [booking, setBooking] = useState<Booking | null>(null);
 
   return (
     <div className="bookings">

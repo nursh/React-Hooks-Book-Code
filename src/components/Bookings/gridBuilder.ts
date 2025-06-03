@@ -1,5 +1,5 @@
 import { sessions as sessionNames } from '../../static.json';
-import type { Bookable, Grid } from '../../types';
+import type { Bookable, Booking, BookingDetail, Grid } from '../../types';
 import { addDays, shortISO } from '../../utils/date-wrangler';
 
 export function getGrid(bookable: Bookable, startDate: Date) {
@@ -27,5 +27,16 @@ export function getGrid(bookable: Bookable, startDate: Date) {
     dates,
     sessions
   }
+}
 
+export function transformBookings(bookingsArray: Booking[]) {
+
+  return bookingsArray.reduce((bookings: BookingDetail, booking: Booking) => {
+    const { session, date } = booking;
+    if (!bookings[session]) {
+      bookings[session] = {}
+    }
+    bookings[session][date] = booking;
+    return bookings;
+  }, {})
 }

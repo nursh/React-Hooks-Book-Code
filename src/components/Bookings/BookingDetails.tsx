@@ -1,7 +1,7 @@
 import type { Bookable, Booking } from "../../types";
 
 type Props = {
-  booking?: Booking;
+  booking: Booking | null;
   bookable?: Bookable;
 }
 

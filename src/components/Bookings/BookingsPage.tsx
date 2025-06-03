@@ -1,7 +1,7 @@
 import { useState } from "react";
 import BookablesList from "../Bookables/BookablesList";
 import Bookings from './Bookings';
-import { Bookable } from "../../types";
+import type { Bookable } from "../../types";
 
 export default function BookingsPage() {
   const [bookable, setBookable] = useState<Bookable>();
