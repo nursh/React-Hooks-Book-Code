@@ -11,6 +11,7 @@ export type Booking = {
   title: string;
   bookableId: number;
   bookerId: number;
+  notes: string;
 }
 
 export type BookingDetail = {
