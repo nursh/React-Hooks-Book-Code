@@ -3,13 +3,16 @@ import type { User } from '../../types';
 import Spinner from "../UI/Spinner";
 import getData from "../../utils/api";
 
-export default function UsersList() {
+
+type Props = {
+  user: User | null;
+  setUser: (user: User | null) => void;
+}
+
+export default function UsersList({ user, setUser }: Props) {
   const [error, setError] = useState<{ message: string } | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-
-  const [userIndex, setUserIndex] = useState(0);
   const [users, setUsers] = useState<User[] | null>(null);
-  const user = users?.[userIndex];
 
   useEffect(() => {
     getData<User[]>('http://localhost:3001/users')
@@ -21,7 +24,7 @@ export default function UsersList() {
         setError(error)
         setIsLoading(false);
       });
-  }, []);
+  }, [setUser]);
 
   if (isLoading) {
     return <p><Spinner />Loading Users...</p>
@@ -34,28 +37,17 @@ export default function UsersList() {
   return (
     <>
       <ul className="users items-list-nav">
-        {users && users.map((user, idx) => (
+        {users && users.map((u) => (
           <li
-            key={user.id}
-            className={idx === userIndex ? "selected" : undefined}
+            key={u.id}
+            className={u.id === user?.id ? "selected" : undefined}
           >
-            <button className="btn" onClick={() => setUserIndex(idx)}>
-              {user.name}
+            <button className="btn" onClick={() => setUser(user)}>
+              {u.name}
             </button>
           </li>
         ))}
       </ul>
-      {user &&
-        <div className="item user">
-          <div className="item-header">
-            <h2>{user.name}</h2>
-          </div>
-          <div className="item-details">
-            <h3>{user.title}</h3>
-            <p>{user.notes}</p>
-          </div>
-        </div>
-      }
     </>
   );
 }
