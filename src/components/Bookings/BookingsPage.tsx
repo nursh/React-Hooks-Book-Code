@@ -4,7 +4,7 @@ import Bookings from './Bookings';
 import type { Bookable } from "../../types";
 
 export default function BookingsPage() {
-  const [bookable, setBookable] = useState<Bookable>();
+  const [bookable, setBookable] = useState<Bookable | null>(null);
 
 
   return (

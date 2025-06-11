@@ -5,9 +5,9 @@ import { type Bookable } from "../../types";
 
 
 export default function BookablesView() {
-  const [bookable, setBookable] = useState<Bookable>();
+  const [bookable, setBookable] = useState<Bookable | null>(null);
   
-  const updateBookable = useCallback((b: Bookable) => {
+  const updateBookable = useCallback((b: Bookable | null) => {
     if (b) {
       console.log(b.title);
       setBookable(b);

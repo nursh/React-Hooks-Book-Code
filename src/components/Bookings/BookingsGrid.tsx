@@ -7,7 +7,7 @@ import Spinner from "../UI/Spinner";
 
 type Props = {
   week: Week;
-  bookable?: Bookable;
+  bookable: Bookable | null;
   booking: Booking | null;
   setBooking: (booking: Booking | null) => void;
 };

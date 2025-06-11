@@ -6,7 +6,7 @@ import { FaEdit } from "react-icons/fa";
 
 type Props = {
   booking: TBooking | null;
-  bookable: Bookable;
+  bookable: Bookable | null;
 }
 
 export default function BookingDetails({ booking, bookable }: Props) {

@@ -3,7 +3,7 @@ import type { Bookable, Booking } from "../../types";
 
 type Props = {
   booking: Booking;
-  bookable: Bookable
+  bookable: Bookable | null
 }
 export default function Booking({ booking, bookable }: Props) {
 
@@ -15,7 +15,7 @@ export default function Booking({ booking, bookable }: Props) {
       <p>{title}</p>
 
       <label htmlFor="">Bookable</label>
-      <p>{bookable.title}</p>
+      <p>{ bookable ? bookable.title : null}</p>
 
       <label htmlFor="">Booking Date</label>
       <p>{(new Date(date)).toDateString()}</p>

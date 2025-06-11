@@ -8,7 +8,7 @@ import BookingDetails from "./BookingDetails"
 
 
 type Props = {
-  bookable?: Bookable
+  bookable: Bookable | null;
 }
 
 export default function Bookings({ bookable }: Props) {

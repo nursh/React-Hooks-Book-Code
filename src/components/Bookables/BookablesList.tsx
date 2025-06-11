@@ -6,8 +6,8 @@ import getData from "../../utils/api";
 import type { Bookable } from "../../types";
 
 type Props = {
-  bookable?: Bookable;
-  setBookable: (b: Bookable) => void
+  bookable: Bookable | null;
+  setBookable: (b: Bookable | null) => void
 }
 
 export default function BookablesList({ bookable, setBookable }: Props) {
