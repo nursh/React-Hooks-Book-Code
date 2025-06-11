@@ -13,9 +13,16 @@ import SayWindowSize from "../book-examples/SideEffect/SayWindowSize";
 import Counter from "../book-examples/Refs/Counter";
 import Colors from "../book-examples/Props/Colors";
 import Anagram from "../book-examples/Memo/Anagram";
+import { useState } from "react";
+import type { User } from "../types";
+import UserContext from "./Users/UserContext";
 
 function App() {
+
+  const [user, setUser] = useState<User | undefined>(undefined);
+
   return (
+    <UserContext.Provider value={user}> 
     <div className="App">
       <header>
         <nav>
@@ -40,8 +47,9 @@ function App() {
             </li>
           </ul>
         </nav>
-        <UserPicker />
+        <UserPicker user={user} setUser={setUser} />
       </header>
+
 
       <Routes>
         <Route path="bookings" element={<BookingsPage />} />
@@ -56,6 +64,7 @@ function App() {
         <Route path="anagram" element={<Anagram />} />
       </Routes>
     </div>
+    </UserContext.Provider>
   );
 }
 
