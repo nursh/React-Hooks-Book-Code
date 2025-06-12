@@ -13,15 +13,11 @@ import SayWindowSize from "../book-examples/SideEffect/SayWindowSize";
 import Counter from "../book-examples/Refs/Counter";
 import Colors from "../book-examples/Props/Colors";
 import Anagram from "../book-examples/Memo/Anagram";
-import { useState } from "react";
-import type { User } from "../types";
-import UserContext from "./Users/UserContext";
+import  { UserProvider } from "./Users/UserContext";
 
 function App() {
-  const [user, setUser] = useState<User | null>(null);
-
   return (
-    <UserContext.Provider value={user}>
+    <UserProvider>
       <BrowserRouter>
         <div className="App">
           <header>
@@ -47,7 +43,7 @@ function App() {
                 </li>
               </ul>
             </nav>
-            <UserPicker user={user} setUser={setUser} />
+            <UserPicker />
           </header>
 
           <Routes>
@@ -64,7 +60,7 @@ function App() {
           </Routes>
         </div>
       </BrowserRouter>
-    </UserContext.Provider>
+    </UserProvider>
   );
 }
 
