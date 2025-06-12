@@ -14,6 +14,7 @@ import Counter from "../book-examples/Refs/Counter";
 import Colors from "../book-examples/Props/Colors";
 import Anagram from "../book-examples/Memo/Anagram";
 import  { UserProvider } from "./Users/UserContext";
+import Greeting from "../book-examples/CustomHooks/Greeting/GreetingHook";
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function App() {
             <Route path="counter" element={<Counter />} />
             <Route path="colors" element={<Colors />} />
             <Route path="anagram" element={<Anagram />} />
+            <Route path="greeting" element={<Greeting />} />
           </Routes>
         </div>
       </BrowserRouter>
