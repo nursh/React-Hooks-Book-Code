@@ -15,6 +15,7 @@ import Colors from "../book-examples/Props/Colors";
 import Anagram from "../book-examples/Memo/Anagram";
 import  { UserProvider } from "./Users/UserContext";
 import Greeting from "../book-examples/CustomHooks/Greeting/GreetingApp";
+import WindowSizer from "../book-examples/CustomHooks/WindowSizer/WindowSizer";
 
 function App() {
   return (
@@ -58,7 +59,8 @@ function App() {
             <Route path="counter" element={<Counter />} />
             <Route path="colors" element={<Colors />} />
             <Route path="anagram" element={<Anagram />} />
-            <Route path="greeting" element={<Greeting />} />
+            <Route path="greeting-hook" element={<Greeting />} />
+            <Route path="resize-hook" element={<WindowSizer />} />
           </Routes>
         </div>
       </BrowserRouter>
