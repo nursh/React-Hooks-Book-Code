@@ -16,6 +16,7 @@ import Anagram from "../book-examples/Memo/Anagram";
 import  { UserProvider } from "./Users/UserContext";
 import Greeting from "../book-examples/CustomHooks/Greeting/GreetingApp";
 import WindowSizer from "../book-examples/CustomHooks/WindowSizer/WindowSizer";
+import UserPickerHook from "../book-examples/CustomHooks/StorageHook/UserPickerHook";
 
 function App() {
   return (
@@ -61,6 +62,7 @@ function App() {
             <Route path="anagram" element={<Anagram />} />
             <Route path="greeting-hook" element={<Greeting />} />
             <Route path="resize-hook" element={<WindowSizer />} />
+            <Route path="storage-hook" element={<UserPickerHook />} />
           </Routes>
         </div>
       </BrowserRouter>
