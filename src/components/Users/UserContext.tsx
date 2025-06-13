@@ -3,9 +3,7 @@ import type { User } from "../../types";
 import { UserSetContext } from "./UserSetContext";
 
 
-const UserContext = createContext<User | null>(null);
-export default UserContext;
-
+export const UserContext = createContext<User | null>(null);
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
 

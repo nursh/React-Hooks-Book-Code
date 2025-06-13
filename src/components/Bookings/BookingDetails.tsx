@@ -1,8 +1,7 @@
-import { useContext } from "react";
 import type { Bookable, Booking as TBooking } from "../../types";
 import Booking from './Booking';
-import UserContext from "../Users/UserContext";
 import { FaEdit } from "react-icons/fa";
+import { useUser } from "../Users/useUser";
 
 type Props = {
   booking: TBooking | null;
@@ -11,7 +10,7 @@ type Props = {
 
 export default function BookingDetails({ booking, bookable }: Props) {
 
-  const user = useContext(UserContext);
+  const [user] = useUser();
   const isBooker = booking && user && (booking.bookerId === user.id);
 
   return (
