@@ -4,7 +4,7 @@ import useFetch from "../../utils/useFetch";
 import { getGrid, transformBookings } from "./gridBuilder";
 import { useMemo } from 'react';
 
-export function useBookings(bookableId: number, startDate: Date, endDate: Date) {
+export function useBookings(bookableId: number | null, startDate: Date, endDate: Date) {
 
   const start = shortISO(startDate);
   const end = shortISO(endDate);
@@ -20,7 +20,7 @@ export function useBookings(bookableId: number, startDate: Date, endDate: Date) 
   }
 }
 
-export function useGrid(bookable: Bookable, startDate: Date) {
+export function useGrid(bookable: Bookable | null, startDate: Date) {
   return useMemo(
     () => bookable ? getGrid(bookable, startDate) : {},
     [bookable, startDate]
