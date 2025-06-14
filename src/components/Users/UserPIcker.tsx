@@ -1,23 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import type { User } from '../../types';
 import Spinner from '../UI/Spinner';
 import { useUser } from './useUser';
+import useFetch from '../../utils/useFetch';
 
 
 
 export default function UserPicker() {
-  const [users, setUsers] = useState<User[] | null>(null);
+  
+  const { data: users = [], status, error } = useFetch<User[]>('http://localhost:3001/users');
   const [user, setUser] = useUser();
   
   useEffect(() => {
-    fetch('http://localhost:3001/users')
-      .then(res => res.json())
-      .then((data: User[]) => {
-        setUsers(data)
-        setUser(data[0])
-      } 
-    )
-  }, [setUser]);
+    setUser(users[0])
+  }, [setUser, users]);
   
   function handleSelect(evt: React.ChangeEvent<HTMLSelectElement>) {
     const selectedID = parseInt(evt.target.value, 10);
@@ -27,8 +23,12 @@ export default function UserPicker() {
     }
   }
 
-  if (users === null) {
+  if (status === 'loading') {
     return <Spinner />
+  }
+
+  if (status === 'error' && error !== null) {
+    return <p>Something went wrong: {error.message} </p>
   }
 
   return (

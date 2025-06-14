@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
 import type { User } from '../../types';
 import Spinner from "../UI/Spinner";
-import getData from "../../utils/api";
+import useFetch from "../../utils/useFetch";
 
 
 type Props = {
@@ -10,27 +9,19 @@ type Props = {
 }
 
 export default function UsersList({ user, setUser }: Props) {
-  const [error, setError] = useState<{ message: string } | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [users, setUsers] = useState<User[] | null>(null);
 
-  useEffect(() => {
-    getData<User[]>('http://localhost:3001/users')
-      .then(users => {
-        setUsers(users);
-        setIsLoading(false);
-      })
-      .catch(error => {
-        setError(error)
-        setIsLoading(false);
-      });
-  }, [setUser]);
+  const {
+    data: users = [],
+    status,
+    error
+  } = useFetch<User[]>('http://localhost:3001/users')
 
-  if (isLoading) {
+
+  if (status === 'loading') {
     return <p><Spinner />Loading Users...</p>
   }
 
-  if (error && typeof error === 'object') {
+  if (status === 'error' &&  error !== null) {
     return <p>{error.message}</p>
   }
 
