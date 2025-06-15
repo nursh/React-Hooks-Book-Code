@@ -15,9 +15,9 @@ export default function BookablesView() {
   }, []);
 
   return (
-    <>
+    <main className="bookables-page">
       <BookablesList bookable={bookable} setBookable={updateBookable} />
       <BookableDetails bookable={bookable} />
-    </>
+    </main>
   )
 }
