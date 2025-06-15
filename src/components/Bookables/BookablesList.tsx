@@ -1,52 +1,35 @@
-import { useEffect } from "react";
 import { FaArrowRight } from "react-icons/fa";
 
-import Spinner from "../UI/Spinner";
 import type { Bookable } from "../../types";
-import useFetch from "../../utils/useFetch";
+import { Link, useNavigate } from "react-router";
 
 type Props = {
   bookable: Bookable | null;
-  setBookable: (b: Bookable | null) => void
+  bookables: Bookable[];
+  getUrl: (id: number) => string;
 }
 
-export default function BookablesList({ bookable, setBookable }: Props) {
+export default function BookablesList({ bookable, bookables, getUrl }: Props) {
 
-  const {
-    data: bookables = [],
-    status,
-    error
-  } = useFetch<Bookable[]>('http://localhost:3001/bookables');
 
   const group = bookable?.group;
-
   const bookablesInGroup = bookables.filter((b) => b.group === group);
   const groups = [...new Set(bookables?.map((b) => b.group))];
 
-  useEffect(() => {
-    setBookable(bookables[0]);
-  }, [bookables, setBookable]);
+  const navigate = useNavigate();
 
   function nextBookable() {
     const i = bookablesInGroup.indexOf(bookable!);
     const nextIndex = (i + 1) % bookablesInGroup.length;
     const nextBookable = bookablesInGroup[nextIndex];
-    setBookable(nextBookable);
+    navigate(getUrl(nextBookable.id));
   }
 
   function changeGroup(event: React.ChangeEvent<HTMLSelectElement>) {
     const bookablesInSelectedGroup = bookables.filter(
       b => b.group === event.target.value
     );
-    setBookable(bookablesInSelectedGroup[0]);
-  }
-
-  if (status === 'error' && error !== null) {
-    return <p>{error.message}</p>
-  }
-  
-  if (status === 'loading') {
-    return <p><Spinner />Loading bookables...</p>
+    navigate(getUrl(bookablesInSelectedGroup[0].id));
   }
 
   return (
@@ -64,9 +47,9 @@ export default function BookablesList({ bookable, setBookable }: Props) {
               key={b.id}
               className={b.id === bookable?.id ? "selected" : undefined}
             >
-              <button className="btn" onClick={() => setBookable(b)}>
+              <Link to={getUrl(b.id)} className="btn">
                 {b.title}
-              </button>
+              </Link>
             </li>
           ))}
         </ul>
