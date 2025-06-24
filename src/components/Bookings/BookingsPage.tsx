@@ -1,17 +1,22 @@
 import BookablesList from "../Bookables/BookablesList";
 import Bookings from './Bookings';
 import type { Bookable } from "../../types";
-import useFetch from "../../utils/useFetch";
 import { shortISO } from "../../utils/date-wrangler";
 import PageSpinner from "../UI/PageSpinner";
 import { useBookingsParams } from "./bookingsHooks";
+import { useQuery } from "@tanstack/react-query";
+import getData from "../../utils/api";
 
 export default function BookingsPage() {
   const {
     data: bookables = [],
     status,
     error
-  } = useFetch<Bookable[]>('http://localhost:3001/bookables');
+  } = useQuery({
+    queryKey: ["bookables"],
+    queryFn: () => getData<Bookable[]>('http://localhost:3001/bookables')
+  });
+
   const { date, bookableId } = useBookingsParams();
   
   const bookable = bookables.find(
@@ -27,7 +32,7 @@ export default function BookingsPage() {
     return <p>{error?.message}</p>
   }
 
-  if (status === 'loading') {
+  if (status === 'pending') {
     return <PageSpinner />
   }
 

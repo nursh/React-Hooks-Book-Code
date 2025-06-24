@@ -1,10 +1,11 @@
 import type { Booking, Bookable } from "../../types";
 import { shortISO } from "../../utils/date-wrangler";
-import useFetch from "../../utils/useFetch";
 import { getGrid, transformBookings } from "./gridBuilder";
 import { useMemo } from 'react';
 import { useSearchParams } from "react-router";
 import { isDate } from "../../utils/date-wrangler";
+import getData from "../../utils/api";
+import { useQuery } from "@tanstack/react-query";
 
 export function useBookings(bookableId: number | undefined, startDate: Date, endDate: Date) {
 
@@ -14,7 +15,10 @@ export function useBookings(bookableId: number | undefined, startDate: Date, end
   const urlRoot = 'http://localhost:3001/bookings';
 
   const queryString = `bookableId=${bookableId}&date_gte=${start}&date_lte=${end}`;
-  const query = useFetch<Booking[]>(`${urlRoot}?${queryString}`);
+  const query = useQuery({
+    queryKey: ["bookings", bookableId, start, end],
+    queryFn: () => getData<Booking[]>(`${urlRoot}?${queryString}`)
+  });
 
   return {
     bookings: query.data ? transformBookings(query.data) : {},

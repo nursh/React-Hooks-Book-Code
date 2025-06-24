@@ -1,6 +1,7 @@
 import type { User } from '../../types';
 import Spinner from "../UI/Spinner";
-import useFetch from "../../utils/useFetch";
+import getData from '../../utils/api';
+import { useQuery } from '@tanstack/react-query';
 
 
 type Props = {
@@ -14,10 +15,13 @@ export default function UsersList({ user, setUser }: Props) {
     data: users = [],
     status,
     error
-  } = useFetch<User[]>('http://localhost:3001/users')
+  } = useQuery({
+    queryKey: ["users"],
+    queryFn: () => getData<User[]>('http://localhost:3001/users')
+  }) 
 
 
-  if (status === 'loading') {
+  if (status === 'pending') {
     return <p><Spinner />Loading Users...</p>
   }
 

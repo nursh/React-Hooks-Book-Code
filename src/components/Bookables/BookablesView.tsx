@@ -1,10 +1,11 @@
 import BookablesList from "./BookablesList";
 import BookableDetails from "./BookableDetails";
 import { type Bookable } from "../../types";
-import useFetch from "../../utils/useFetch";
 import { Link, useParams } from "react-router";
 import PageSpinner from "../UI/PageSpinner";
 import { FaPlus } from "react-icons/fa";
+import { useQuery } from "@tanstack/react-query";
+import getData from "../../utils/api";
 
 
 export default function BookablesView() {
@@ -13,7 +14,10 @@ export default function BookablesView() {
     data: bookables = [],
     status,
     error
-  } = useFetch<Bookable[]>('http://localhost:3001/bookables');
+  } = useQuery({
+    queryKey: ["bookables"],
+    queryFn: () => getData<Bookable[]>('http://localhost:3001/bookables')
+  });
 
   const { id } = useParams<string>();
   const bookable = id ? bookables.find(
@@ -24,7 +28,7 @@ export default function BookablesView() {
     return <p>{error?.message}</p>
   }
 
-  if (status === 'loading') {
+  if (status === 'pending') {
     return <PageSpinner />
   }
 

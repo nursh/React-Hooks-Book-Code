@@ -2,13 +2,17 @@ import { useEffect } from 'react';
 import type { User } from '../../types';
 import Spinner from '../UI/Spinner';
 import { useUser } from './useUser';
-import useFetch from '../../utils/useFetch';
+import getData from '../../utils/api';
+import { useQuery } from '@tanstack/react-query';
 
 
 
 export default function UserPicker() {
   
-  const { data: users = [], status, error } = useFetch<User[]>('http://localhost:3001/users');
+  const { data: users = [], status, error } = useQuery({
+    queryKey: ["users"],
+    queryFn: () => getData<User[]>('http://localhost:3001/users')
+  });
   const [user, setUser] = useUser();
   
   useEffect(() => {
@@ -23,7 +27,7 @@ export default function UserPicker() {
     }
   }
 
-  if (status === 'loading') {
+  if (status === 'pending') {
     return <Spinner />
   }
 
