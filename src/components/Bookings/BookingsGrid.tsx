@@ -14,13 +14,11 @@ type Props = {
 export default function BookingsGrid(props: Props) {
   const { week, bookable, booking, setBooking } = props;
 
-  const bookableId = bookable ? bookable.id : null;
-
   const {
     bookings,
     status,
     error
-  } = useBookings(bookableId, week.start, week.end);
+  } = useBookings(bookable?.id, week.start, week.end);
 
   const { grid, sessions, dates } = useGrid(bookable, week.start);
 
